@@ -1,22 +1,22 @@
 <?php
 namespace App;
 
+use App\Request\Requests;
+
 require_once 'vendor/autoload.php';
 
-use App\Controllers\BaseController;
-use App\Routes\Router;
+$app = new Application;
+
+var_dump($app->resolve);
 
 
-$go_route = new Router();
-
-$go_route->route('/', function (){
-    (new BaseController())->render();
-
+$app->router->make('/', 'get', function (){
+    return 'Hello world';
 });
 
-$go_route->route('/test', function (){
-    echo "Hello world";
-
+$app->router->make('/', 'post', function (){
+    return 'Hello world';
 });
+
 ?>
 

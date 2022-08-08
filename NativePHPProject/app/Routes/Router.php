@@ -2,23 +2,29 @@
 namespace App\Routes;
 
 use App\Controllers\BaseController;
+use App\Request\Requests;
 
 
 class Router
 {
-    public $routes = [];
+    protected $routes = [];
+
+
+    function make($path, $method, callable $callback){
+
+    }
 
     function route($path, callable $callback)
     {
 
-
         $routes[$path] = $callback;
-        $uri = $_SERVER['REQUEST_URI'];
-            foreach($routes as $path => $callback)
-            {
-                if ($path !== $uri) continue;
-                $callback();
-            }
+        $uri = (new Requests())->getPath();
+
+        foreach($routes as $path => $callback)
+        {
+            if ($path !== $uri) continue;
+            $callback();
+        }
 
     }
 
